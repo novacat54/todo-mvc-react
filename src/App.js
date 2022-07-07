@@ -56,17 +56,22 @@ function App() {
 
   return (
     <div className="App">
-      <input id='category' placeholder='What needs to be done?' onKeyDown={enterKeyPressed} />
-      <ul>
-        {data.length == 0 ? "" : data.map(entry => (filtersState === 'ALL' ? entry : filtersState === 'COMPLETED' ? entry.completed : !entry.completed) &&
-          <ListItem key={entry.elementID} itemData={entry} onRemove={removeItem} onComplete={checkboxHandler} onEdit={saveNewValue} />)}
-      </ul>
-      {!data.some(entry => entry.completed) ? '' :
-        <button id="clear-completed" onClick={() => clearCompletedItems()}>
-          Clear Completed
-        </button>
-      }
-      {data.length == 0 ? "" : <Filters allItems={data} handleFiltersClick={handleFiltersChange} />}
+      <h1>todos</h1>
+      <div id='todo-section'>
+        <input id='new-todo' placeholder='What needs to be done?' onKeyDown={enterKeyPressed} />
+        <ul className='todo-list'>
+          {data.length == 0 ? "" : data.map(entry => (filtersState === 'ALL' ? entry : filtersState === 'COMPLETED' ? entry.completed : !entry.completed) &&
+            <ListItem key={entry.elementID} itemData={entry} onRemove={removeItem} onComplete={checkboxHandler} onEdit={saveNewValue} />)}
+        </ul>
+        <div id='filters-section'>
+        {data.length == 0 ? "" : <Filters allItems={data} filterSelected = {filtersState} handleFiltersClick={handleFiltersChange} />}
+        {!data.some(entry => entry.completed) ? '' :
+          <button id="clear-completed" onClick={() => clearCompletedItems()}>
+            Clear Completed
+          </button>
+        }
+        </div>
+      </div>
     </div>
   );
 

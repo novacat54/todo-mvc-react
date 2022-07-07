@@ -31,6 +31,7 @@ function ListItem(props = {
         <label onDoubleClick={() => setEditMode(true)}>{props.itemData.value}</label>
         :
         <input autoFocus
+          className='edit'
           value={inputValue}
           onChange={handleInputChange}
           onKeyDown={(event) => event.keyCode == 13 && saveChanges(event)} 
